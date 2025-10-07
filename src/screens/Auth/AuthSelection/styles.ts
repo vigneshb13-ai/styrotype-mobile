@@ -1,7 +1,7 @@
 import { Theme } from "../../../theme/index";
 import { StyleSheet } from "react-native";
 
-export const getLoginScreenStyles = (theme: Theme) =>
+export const getAuthSeletionScreenStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,

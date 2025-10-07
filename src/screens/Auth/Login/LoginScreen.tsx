@@ -12,15 +12,21 @@ import { AuthScreenNavigation } from "../../../navigators/types";
 import { ThemedText } from "../../../components/core/ThemedText/ThemedText";
 import { useTheme } from "../../../providers/ThemeProvider/ThemeProvider";
 import ThemedInput from "../../../components/core/ThemedInput/ThemedInput";
-import { Eye, LockKeyhole, Mail, OctagonAlert } from "lucide-react-native";
+import {
+  ArrowLeft,
+  Eye,
+  LockKeyhole,
+  Mail,
+  OctagonAlert,
+} from "lucide-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StyroLogoIcon from "../../../assets/icons/styroLogo";
-import GoogleLogo from "../../../assets/icons/googleIcon";
 import {
   getAuth,
   signInWithEmailAndPassword,
 } from "@react-native-firebase/auth";
 import { useAuth } from "../../../providers/AuthProvider/AuthProvider";
+import { validateEmail } from "../../../utils/shared";
 
 const LoginScreen = () => {
   const styles = useStyles(getLoginScreenStyles);
@@ -40,11 +46,6 @@ const LoginScreen = () => {
   const onPressOutside = () => {
     emailRef.current?.blur();
     passwordRef.current?.blur();
-  };
-
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
   };
 
   const handleLogin = async () => {
@@ -97,6 +98,17 @@ const LoginScreen = () => {
         style={[styles.container]}
         edges={["bottom", "left", "right"]}
       >
+        <TouchableOpacity
+          style={{ marginLeft: 10, position: "absolute", top: 60, left: 10 }}
+          onPress={() => navigation.goBack()}
+        >
+          <ArrowLeft
+            strokeWidth={1.5}
+            height={24}
+            width={24}
+            color={"#ffffff"}
+          />
+        </TouchableOpacity>
         {/* Background Circles */}
         <View
           style={{
@@ -132,7 +144,7 @@ const LoginScreen = () => {
           }}
         >
           <View style={{ gap: 8, marginBottom: 10 }}>
-            <View style={{ gap: 0, marginBottom: 1 }}>
+            <View style={{ marginBottom: 1 }}>
               <StyroLogoIcon
                 color={theme.colors.colors.primary}
                 width={80}
@@ -144,7 +156,7 @@ const LoginScreen = () => {
               color={theme.colors.colors.textPrimary}
               style={{ lineHeight: 20 }}
             >
-              STYROTYPE
+              LOGIN
             </ThemedText>
             <ThemedText
               variant="bodySmall"
@@ -256,7 +268,7 @@ const LoginScreen = () => {
                 variant="bodySmall"
                 color={theme.colors.colors.textPrimary}
               >
-                Forget Password?
+                Forget Password
               </ThemedText>
             </TouchableOpacity>
           </View>
@@ -290,31 +302,13 @@ const LoginScreen = () => {
                 borderRadius: 8,
                 width: "100%",
               }}
+              onPress={() => navigation.navigate("Register")}
             >
-              <GoogleLogo height={20} width={20} />
               <ThemedText
                 variant="body"
                 color={theme.colors.colors.textPrimary}
               >
-                Login with Google
-              </ThemedText>
-            </TouchableOpacity>
-          </View>
-
-          {/* Signup */}
-          <View style={{ alignItems: "center", marginTop: 20 }}>
-            <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-              <ThemedText
-                variant="bodySmall"
-                color={theme.colors.colors.textPrimary}
-              >
-                Still not part of Styrotype fam?{" "}
-                <ThemedText
-                  variant="bodySmall"
-                  color={theme.colors.colors.primary}
-                >
-                  Sign Up
-                </ThemedText>
+                Create an account
               </ThemedText>
             </TouchableOpacity>
           </View>

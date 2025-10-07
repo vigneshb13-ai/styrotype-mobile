@@ -1,5 +1,6 @@
 export const enum Navigations {
-    LoginScreen = 'Login',
-    RegisterScreen = 'Register',
-    HomeScreen = 'Home'
+  AuthSelectionScreen = "AuthSelection",
+  LoginScreen = "Login",
+  RegisterScreen = "Register",
+  HomeScreen = "Home",
 }
