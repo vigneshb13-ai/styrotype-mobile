@@ -27,6 +27,7 @@ import {
 } from "@react-native-firebase/auth";
 import { useAuth } from "../../../providers/AuthProvider/AuthProvider";
 import { validateEmail } from "../../../utils/shared";
+import CheckBox from "@react-native-community/checkbox";
 
 const LoginScreen = () => {
   const styles = useStyles(getLoginScreenStyles);
@@ -255,14 +256,24 @@ const LoginScreen = () => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <TouchableOpacity>
-              <ThemedText
-                variant="bodySmall"
-                color={theme.colors.colors.textPrimary}
-              >
-                Remember Me
-              </ThemedText>
-            </TouchableOpacity>
+            <View style={{ flexDirection: "row", rowGap: 18 }}>
+              <CheckBox
+                boxType="square"
+                style={{ width: 15, height: 15, marginRight: 10 }}
+                onCheckColor={theme.colors.colors.text}
+                onFillColor={theme.colors.colors.primary}
+                tintColor={theme.colors.colors.text}
+                onTintColor={theme.colors.colors.primary}
+              />
+              <TouchableOpacity>
+                <ThemedText
+                  variant="bodySmall"
+                  color={theme.colors.colors.textPrimary}
+                >
+                  Remember Me
+                </ThemedText>
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <ThemedText
                 variant="bodySmall"
