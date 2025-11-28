@@ -3,6 +3,7 @@ import React, {
   ReactNode,
   useRef,
   useImperativeHandle,
+  useEffect,
 } from "react";
 import { View, TextInput, TextInputProps, Text, Pressable } from "react-native";
 import Animated, {
@@ -54,13 +55,15 @@ const ThemedInput = forwardRef<TextInput, ThemedInputProps>(
     const errorOpacity = useSharedValue(0);
     const theme = useTheme();
 
-    if (isError) {
-      errorY.value = withTiming(0, { duration: 200 });
-      errorOpacity.value = withTiming(1, { duration: 200 });
-    } else {
-      errorY.value = withTiming(10, { duration: 200 });
-      errorOpacity.value = withTiming(0, { duration: 200 });
-    }
+    useEffect(() => {
+      if (isError) {
+        errorY.value = withTiming(0, { duration: 200 });
+        errorOpacity.value = withTiming(1, { duration: 200 });
+      } else {
+        errorY.value = withTiming(10, { duration: 200 });
+        errorOpacity.value = withTiming(0, { duration: 200 });
+      }
+    }, [isError]);
 
     const animatedErrorStyle = useAnimatedStyle(() => ({
       transform: [{ translateY: errorY.value }],
@@ -74,15 +77,17 @@ const ThemedInput = forwardRef<TextInput, ThemedInputProps>(
 
     return (
       <View style={styles.mainContainer}>
-        <Animated.Text
-          style={[
-            styles.text,
-            { left: leftComponent ? 34 : 14, color: labelColor },
-            animatedLabelStyle,
-          ]}
-        >
-          {label}
-        </Animated.Text>
+        <Pressable onPress={() => inputRef.current?.focus()}>
+          <Animated.Text
+            style={[
+              styles.text,
+              { left: leftComponent ? 34 : 14, color: labelColor },
+              animatedLabelStyle,
+            ]}
+          >
+            {label}
+          </Animated.Text>
+        </Pressable>
 
         {/* Pressable wraps the whole input */}
         <Pressable

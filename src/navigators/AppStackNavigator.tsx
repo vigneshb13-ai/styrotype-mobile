@@ -4,6 +4,7 @@ import { useTheme } from "../providers/ThemeProvider/ThemeProvider";
 import { AppStackParamList } from "./types";
 import { HomeScreen } from "../screens/Home";
 import { Navigations } from "../constants/navigation";
+import { CategoriesScreen } from "../screens/Categories";
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -12,12 +13,16 @@ const AppStackNavigator = () => {
 
   const screenOptions = {
     headerShown: false,
-    contentStyle: { backgroundColor: theme.colors.colors.background }
+    contentStyle: { backgroundColor: theme.colors.colors.background },
   };
 
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name={Navigations.HomeScreen} component={HomeScreen} />
+      <Stack.Screen
+        name={Navigations.CategoriesScreen}
+        component={CategoriesScreen}
+      />
     </Stack.Navigator>
   );
 };

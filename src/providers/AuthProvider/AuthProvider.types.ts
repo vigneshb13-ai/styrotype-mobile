@@ -1,19 +1,16 @@
-import { ReactNode } from "react";
-export interface User {
+export type User = {
   uid: string;
   email: string;
-  // add any other fields you need, e.g.
-  displayName?: string;
-  photoURL?: string;
-}
+};
 
-export interface AuthContextType {
+export type AuthContextType = {
   user: User | null;
-  login: (userData: User) => void;
-  logout: () => void;
   loading: boolean;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
-}
-export interface AuthProviderProps {
-  children: ReactNode;
-}
+  register: (email: string, password: string) => Promise<any>;
+  login: (email: string, password: string) => Promise<any>;
+  logout: () => Promise<any>;
+};
+
+export type AuthProviderProps = {
+  children: React.ReactNode;
+};

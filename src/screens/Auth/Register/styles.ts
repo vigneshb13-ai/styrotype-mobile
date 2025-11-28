@@ -9,7 +9,7 @@ export const getRegisterScreenStyles = (theme: Theme) =>
     },
     inputContainer: {
       width: "100%",
-      gap: 20,
+      gap: 10,
     },
     buttonContainer: {
       justifyContent: "center",

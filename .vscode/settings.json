@@ -30,5 +30,6 @@
   "sonarlint.connectedMode.project": {
     "connectionId": "https-sonar-montraelectric-com",
     "projectKey": "oneapp"
-  }
+  },
+  "java.compile.nullAnalysis.mode": "disabled"
 }

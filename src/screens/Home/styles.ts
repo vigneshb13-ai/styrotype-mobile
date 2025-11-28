@@ -14,7 +14,15 @@ export const getHomeScreenStyles = (theme: Theme) =>
       borderRadius: 10,
       justifyContent: "center",
       alignItems: "center",
-      position: "absolute",
+      bottom: 10,
+    },
+    categoryBtn: {
+      height: 50,
+      width: "100%",
+      backgroundColor: theme.colors.colors.primaryDark,
+      borderRadius: 10,
+      justifyContent: "center",
+      alignItems: "center",
       bottom: 10,
     },
   });

@@ -109,11 +109,7 @@ const AuthSelctionScreen = () => {
               }}
               onPress={() => navigation.navigate("Login")}
             >
-              <Mail
-                height={20}
-                width={20}
-                color={theme.colors.colors.textPrimary}
-              />
+              <Mail height={20} width={20} color={theme.colors.colors.text} />
               <ThemedText variant="body" color={theme.colors.colors.text}>
                 Continue with Email
               </ThemedText>

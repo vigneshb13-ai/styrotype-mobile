@@ -25,7 +25,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "@react-native-firebase/auth";
-import { useAuth } from "../../../providers/AuthProvider/AuthProvider";
+
 import { validateEmail } from "../../../utils/shared";
 import CheckBox from "@react-native-community/checkbox";
 
@@ -33,10 +33,9 @@ const LoginScreen = () => {
   const styles = useStyles(getLoginScreenStyles);
   const navigation = useNavigation<AuthScreenNavigation<"Login">>();
   const theme = useTheme();
-  const { login } = useAuth();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("vignesh014@gmail.com");
+  const [password, setPassword] = useState("Admin@123");
   const [isEmailErr, setIsEmailErr] = useState(false);
   const [isPasswordErr, setIsPasswordErr] = useState(false);
   const [errorQueue, setErrorQueue] = useState<string[]>([]);
@@ -72,17 +71,7 @@ const LoginScreen = () => {
 
     try {
       const auth = getAuth();
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log("#########", userCredential);
-      login({
-        uid: userCredential.user.uid,
-        displayName: userCredential.user.displayName ?? "",
-        email: userCredential.user.email ?? "",
-      });
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error: any) {
       let errorMsg = "Invalid email or password";
       if (error.code === "auth/user-not-found") setIsEmailErr(true);
@@ -107,7 +96,7 @@ const LoginScreen = () => {
             strokeWidth={1.5}
             height={24}
             width={24}
-            color={"#ffffff"}
+            color={theme.colors.colors.textPrimary}
           />
         </TouchableOpacity>
         {/* Background Circles */}
@@ -144,7 +133,7 @@ const LoginScreen = () => {
             gap: 10,
           }}
         >
-          <View style={{ gap: 8, marginBottom: 10 }}>
+          <View style={{ gap: 8, marginBottom: 20 }}>
             <View style={{ marginBottom: 1 }}>
               <StyroLogoIcon
                 color={theme.colors.colors.primary}
@@ -256,30 +245,29 @@ const LoginScreen = () => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <View style={{ flexDirection: "row", rowGap: 18 }}>
+            <View style={{ flexDirection: "row", gap: 18 }}>
               <CheckBox
-                boxType="square"
-                style={{ width: 15, height: 15, marginRight: 10 }}
-                onCheckColor={theme.colors.colors.text}
+                boxType="circle"
+                style={{ width: 15, height: 15 }}
+                onCheckColor={theme.colors.colors.primaryDark}
                 onFillColor={theme.colors.colors.primary}
-                tintColor={theme.colors.colors.text}
+                tintColor={theme.colors.colors.primaryDark}
                 onTintColor={theme.colors.colors.primary}
               />
-              <TouchableOpacity>
-                <ThemedText
-                  variant="bodySmall"
-                  color={theme.colors.colors.textPrimary}
-                >
-                  Remember Me
-                </ThemedText>
-              </TouchableOpacity>
+
+              <ThemedText
+                variant="bodySmall"
+                color={theme.colors.colors.textPrimary}
+              >
+                Remember Me
+              </ThemedText>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("Register")}>
               <ThemedText
                 variant="bodySmall"
                 color={theme.colors.colors.textPrimary}
               >
-                Forget Password
+                Forget Password?
               </ThemedText>
             </TouchableOpacity>
           </View>

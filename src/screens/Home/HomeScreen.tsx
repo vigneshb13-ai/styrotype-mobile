@@ -6,21 +6,37 @@ import { getHomeScreenStyles } from "./styles";
 import { useStyles } from "../../hooks/useStyles";
 import { useTheme } from "../../providers/ThemeProvider/ThemeProvider";
 import { useAuth } from "../../providers/AuthProvider/AuthProvider";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { getAuth, signOut } from "@react-native-firebase/auth";
+import { useNavigation } from "@react-navigation/native";
+import { AppScreenNavigation } from "../../navigators/types";
+import { get } from "../../services/axios-client";
 
 const HomeScreen = () => {
   const theme = useTheme();
   const styles = useStyles(getHomeScreenStyles);
-  const { user, setUser } = useAuth();
+  const { user } = useAuth();
+  const navigation = useNavigation<AppScreenNavigation<"Home">>();
   const logout = useCallback(async () => {
     try {
       await signOut(getAuth());
-      setUser(null);
     } catch (err) {
       console.log("Logout error:", err);
     }
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+
+    get(`/users/${user.uid}`)
+      .then((res) => {
+        console.log("#########", res);
+      })
+      .catch((err) => {
+        console.log("#########", err);
+      });
+  }, [user]);
+
   return (
     <SafeAreaView
       style={[
@@ -31,7 +47,7 @@ const HomeScreen = () => {
     >
       <View
         style={{
-          flex: 1,
+          flex: 8,
           justifyContent: "center",
           alignItems: "center",
           paddingHorizontal: 16,
@@ -58,6 +74,19 @@ const HomeScreen = () => {
             delivery, and deals you can’t resist.
           </ThemedText>
         </View>
+      </View>
+      <View style={{ flex: 0.5, gap: 20, marginHorizontal: 20 }}>
+        <TouchableOpacity
+          style={styles.categoryBtn}
+          activeOpacity={0.8}
+          onPress={() => {
+            navigation.navigate("Categories");
+          }}
+        >
+          <ThemedText variant="body" color={theme.colors.colors.text}>
+            Go to Categories
+          </ThemedText>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           activeOpacity={0.8}

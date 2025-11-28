@@ -16,9 +16,8 @@ const RootStackNavigator = () => {
     contentStyle: { backgroundColor: theme.colors.colors.background },
   };
 
-  // Optional: show loading while checking user
   if (loading) {
-    return null; // or a loading spinner
+    return null;
   }
 
   return (
