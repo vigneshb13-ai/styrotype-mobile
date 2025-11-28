@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
   TextInput,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import { useStyles } from "../../../hooks/index";
@@ -34,10 +35,11 @@ const LoginScreen = () => {
   const navigation = useNavigation<AuthScreenNavigation<"Login">>();
   const theme = useTheme();
 
-  const [email, setEmail] = useState("vignesh014@gmail.com");
-  const [password, setPassword] = useState("Admin@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isEmailErr, setIsEmailErr] = useState(false);
   const [isPasswordErr, setIsPasswordErr] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorQueue, setErrorQueue] = useState<string[]>([]);
 
   const emailRef = useRef<TextInput>(null);
@@ -70,9 +72,12 @@ const LoginScreen = () => {
     setIsPasswordErr(false);
 
     try {
+      setIsLoading(true);
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
+      setIsLoading(false);
     } catch (error: any) {
+      setIsLoading(false);
       let errorMsg = "Invalid email or password";
       if (error.code === "auth/user-not-found") setIsEmailErr(true);
       else if (error.code === "auth/wrong-password") setIsPasswordErr(true);
@@ -80,6 +85,7 @@ const LoginScreen = () => {
 
       setErrorQueue([errorMsg]);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -275,6 +281,7 @@ const LoginScreen = () => {
           {/* Buttons */}
           <View style={styles.buttonContainer}>
             <TouchableOpacity
+              disabled={isLoading}
               style={{
                 backgroundColor: theme.colors.colors.primary,
                 minWidth: "100%",
@@ -285,11 +292,19 @@ const LoginScreen = () => {
               }}
               onPress={handleLogin}
             >
-              <ThemedText variant="body" color={theme.colors.colors.text}>
-                Login
-              </ThemedText>
+              {isLoading ? (
+                <ActivityIndicator
+                  size="small"
+                  color={theme.colors.colors.text}
+                />
+              ) : (
+                <ThemedText variant="body" color={theme.colors.colors.text}>
+                  Login
+                </ThemedText>
+              )}
             </TouchableOpacity>
             <TouchableOpacity
+              disabled={isLoading}
               style={{
                 flexDirection: "row",
                 gap: 8,
