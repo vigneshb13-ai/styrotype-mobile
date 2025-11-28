@@ -4,7 +4,7 @@ const BASE_URL = "https://styrotype.onrender.com/api";
 const LOCAL_URL = "http://169.254.213.227:3000/api";
 
 const axiosClient: AxiosInstance = axios.create({
-  baseURL: LOCAL_URL,
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
