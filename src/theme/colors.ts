@@ -24,6 +24,8 @@ export const lightColors = {
     textSecondary: "#4A5057",
     textTertiary: "#76818A",
     text: "#F4F8FB",
+
+    white: "#FFFFFF",
   },
 };
 
@@ -53,5 +55,7 @@ export const darkColors = {
     textSecondary: "#C3C3C3",
     textTertiary: "#76818A",
     text: "#F4F8FB",
+
+    white: "#FFFFFF",
   },
 };

@@ -7,8 +7,18 @@ export type AuthStackParamList = {
 };
 
 export type AppStackParamList = {
+  BottomTabs: undefined;
   Home: undefined;
   Categories: undefined;
+  Profile: undefined;
+  Cart: undefined;
+};
+export type BottomTabsParamList = {
+  Home: undefined;
+  Categories: undefined;
+  Profile: undefined;
+  Wishlist: undefined;
+  Cart: undefined;
 };
 export type RootStackParamList = {
   Splash: undefined;

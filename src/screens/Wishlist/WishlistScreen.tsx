@@ -1,20 +1,20 @@
 import { View } from "react-native";
 import React from "react";
-import { getCategoriesScreenStyles } from "./styles";
+import { getWishlistScreenStyles } from "./styles";
 import { useStyles } from "../../hooks/useStyles";
 import { ThemedText } from "../../components/core/ThemedText/ThemedText";
 import { useTheme } from "../../providers/ThemeProvider/ThemeProvider";
 
-const CategoriesScreen = () => {
-  const styles = useStyles(getCategoriesScreenStyles);
+const WishlistScreen = () => {
+  const styles = useStyles(getWishlistScreenStyles);
   const theme = useTheme();
   return (
     <View style={styles.container}>
       <ThemedText variant="h2" color={theme.colors.colors.textPrimary}>
-        Categories
+        Wishlist
       </ThemedText>
     </View>
   );
 };
 
-export default CategoriesScreen;
+export default WishlistScreen;

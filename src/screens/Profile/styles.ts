@@ -1,12 +1,14 @@
 import { StyleSheet } from "react-native";
 import { Theme } from "../../theme";
 
-export const getCategoriesScreenStyles = (theme: Theme) =>
+export const getProfileScreenStyles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
+      paddingHorizontal: 20,
+      gap: 20,
       backgroundColor: theme.colors.colors.background,
     },
     button: {
@@ -16,15 +18,13 @@ export const getCategoriesScreenStyles = (theme: Theme) =>
       borderRadius: 10,
       justifyContent: "center",
       alignItems: "center",
-      bottom: 10,
     },
-    categoryBtn: {
+    cartBtn: {
       height: 50,
       width: "100%",
       backgroundColor: theme.colors.colors.primaryDark,
       borderRadius: 10,
       justifyContent: "center",
       alignItems: "center",
-      bottom: 10,
     },
   });

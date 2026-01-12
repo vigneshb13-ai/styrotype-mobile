@@ -4,4 +4,6 @@ export const enum Navigations {
   RegisterScreen = "Register",
   HomeScreen = "Home",
   CategoriesScreen = "Categories",
+  ProfileScreen = "Profile",
+  CartScreen = "Cart",
 }

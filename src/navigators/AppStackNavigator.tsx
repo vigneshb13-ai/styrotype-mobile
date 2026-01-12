@@ -2,9 +2,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTheme } from "../providers/ThemeProvider/ThemeProvider";
 
 import { AppStackParamList } from "./types";
-import { HomeScreen } from "../screens/Home";
 import { Navigations } from "../constants/navigation";
-import { CategoriesScreen } from "../screens/Categories";
+import ProfileScreen from "../screens/Profile/ProfileScreen";
+import BottomTabNavigator from "./BottomTabNavigator";
+import CartScreen from "../screens/Cart/CartScreen";
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -18,11 +19,12 @@ const AppStackNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name={Navigations.HomeScreen} component={HomeScreen} />
+      <Stack.Screen name="BottomTabs" component={BottomTabNavigator} />
       <Stack.Screen
-        name={Navigations.CategoriesScreen}
-        component={CategoriesScreen}
+        name={Navigations.ProfileScreen}
+        component={ProfileScreen}
       />
+      <Stack.Screen name={Navigations.CartScreen} component={CartScreen} />
     </Stack.Navigator>
   );
 };
