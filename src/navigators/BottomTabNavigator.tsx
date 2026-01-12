@@ -140,7 +140,7 @@ export default function BottomTabNavigator() {
         },
         tabBarShowLabel: true,
 
-        tabBarActiveTintColor: theme.colors.colors.text,
+        tabBarActiveTintColor: theme.colors.colors.primary,
         tabBarInactiveTintColor: theme.colors.colors.textPrimary,
       }}
     >

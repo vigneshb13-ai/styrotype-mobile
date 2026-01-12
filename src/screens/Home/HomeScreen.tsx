@@ -1,12 +1,13 @@
 import StyroLogoIcon from "../../assets/icons/styroLogo";
 import { ThemedText } from "../../components/core/ThemedText/ThemedText";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getHomeScreenStyles } from "./styles";
 import { useStyles } from "../../hooks/useStyles";
 import { useTheme } from "../../providers/ThemeProvider/ThemeProvider";
 import { useAuth } from "../../providers/AuthProvider/AuthProvider";
 import { useUserInfo } from "../../hooks/queries/use-user-info";
+import { AppHeader } from "../../components/shared";
 
 const HomeScreen = () => {
   const theme = useTheme();
@@ -20,38 +21,42 @@ const HomeScreen = () => {
         styles.container,
         { backgroundColor: theme.colors.colors.background },
       ]}
-      edges={["bottom", "left", "right"]}
+      edges={["top", "bottom", "left", "right"]}
     >
-      <View
-        style={{
-          flex: 8,
-          justifyContent: "center",
-          alignItems: "center",
-          paddingHorizontal: 16,
-          gap: 10,
-        }}
-      >
-        <StyroLogoIcon color={theme.colors.colors.primary} />
+      <AppHeader />
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View
-          style={{ gap: 7, justifyContent: "center", alignItems: "center" }}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            paddingHorizontal: 16,
+            gap: 10,
+            paddingBottom: 100, // accommodate bottom tabs if needed, though safearea handles it
+          }}
         >
-          <ThemedText variant="h2" color={theme.colors.colors.textPrimary}>
-            Home
-          </ThemedText>
-          <ThemedText variant="h3" color={theme.colors.colors.textPrimary}>
-            Hi {data?.data?.firstName ?? ""}
-          </ThemedText>
-          <ThemedText
-            style={{ textAlign: "center", lineHeight: 20 }}
-            variant="bodySmall"
-            color={theme.colors.colors.textPrimary}
+          <StyroLogoIcon color={theme.colors.colors.primary} size={60} />
+          <View
+            style={{ gap: 7, justifyContent: "center", alignItems: "center" }}
           >
-            Step into Styrotype, your ultimate destination for style, tech, and
-            lifestyle essentials. Enjoy seamless shopping, lightning-fast
-            delivery, and deals you can’t resist.
-          </ThemedText>
+            <ThemedText variant="h2" color={theme.colors.colors.textPrimary}>
+              Home
+            </ThemedText>
+            <ThemedText variant="h3" color={theme.colors.colors.textPrimary}>
+              Hi {data?.data?.firstName ?? ""}
+            </ThemedText>
+            <ThemedText
+              style={{ textAlign: "center", lineHeight: 20 }}
+              variant="bodySmall"
+              color={theme.colors.colors.textPrimary}
+            >
+              Step into Styrotype, your ultimate destination for style, tech,
+              and lifestyle essentials. Enjoy seamless shopping, lightning-fast
+              delivery, and deals you can’t resist.
+            </ThemedText>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
