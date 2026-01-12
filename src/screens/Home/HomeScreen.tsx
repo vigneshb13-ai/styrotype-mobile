@@ -28,25 +28,18 @@ const HomeScreen = () => {
         <View
           style={{
             flex: 1,
-            justifyContent: "center",
             alignItems: "center",
             paddingHorizontal: 16,
-            gap: 10,
+            gap: 20,
             paddingBottom: 100, // accommodate bottom tabs if needed, though safearea handles it
           }}
         >
-          <StyroLogoIcon color={theme.colors.colors.primary} size={60} />
-          <View
-            style={{ gap: 7, justifyContent: "center", alignItems: "center" }}
-          >
+          <View style={{ gap: 10, alignItems: "flex-start" }}>
             <ThemedText variant="h2" color={theme.colors.colors.textPrimary}>
-              Home
-            </ThemedText>
-            <ThemedText variant="h3" color={theme.colors.colors.textPrimary}>
               Hi {data?.data?.firstName ?? ""}
             </ThemedText>
             <ThemedText
-              style={{ textAlign: "center", lineHeight: 20 }}
+              style={{ lineHeight: 20 }}
               variant="bodySmall"
               color={theme.colors.colors.textPrimary}
             >

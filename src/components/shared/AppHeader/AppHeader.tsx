@@ -1,12 +1,17 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
-import { Bell, MapPin, Search } from "lucide-react-native";
+import { MapPin, Search, ShoppingBagIcon } from "lucide-react-native";
 import { useTheme } from "../../../providers/ThemeProvider/ThemeProvider";
 import { ThemedText } from "../../core/ThemedText/ThemedText";
 import StyroLogoIcon from "../../../assets/icons/styroLogo";
 
+import { useNavigation } from "@react-navigation/native";
+import { Navigations } from "../../../constants/navigation";
+import { AppScreenNavigation } from "src/navigators/types";
+
 export const AppHeader: React.FC = () => {
   const theme = useTheme();
+  const navigation = useNavigation<AppScreenNavigation<"Home">>();
 
   return (
     <View
@@ -51,12 +56,13 @@ export const AppHeader: React.FC = () => {
           <Search size={20} color={theme.colors.colors.textPrimary} />
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => navigation.navigate(Navigations.CartScreen)}
           style={[
             styles.iconButton,
             { backgroundColor: theme.colors.colors.surface },
           ]}
         >
-          <Bell size={20} color={theme.colors.colors.textPrimary} />
+          <ShoppingBagIcon size={20} color={theme.colors.colors.textPrimary} />
           <View
             style={[
               styles.badge,

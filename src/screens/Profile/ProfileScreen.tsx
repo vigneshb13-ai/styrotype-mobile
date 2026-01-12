@@ -3,8 +3,6 @@ import React, { useCallback } from "react";
 import { getProfileScreenStyles } from "./styles";
 import { useStyles } from "../../hooks/useStyles";
 import { ThemedText } from "../../components/core/ThemedText/ThemedText";
-import { AppScreenNavigation } from "../../navigators/types";
-import { useNavigation } from "@react-navigation/native";
 import { getAuth, signOut } from "@react-native-firebase/auth";
 import { useTheme } from "../../providers/ThemeProvider/ThemeProvider";
 import { useStore } from "../../stores";
@@ -12,7 +10,7 @@ import { useStore } from "../../stores";
 const ProfileScreen = () => {
   const styles = useStyles(getProfileScreenStyles);
   const theme = useTheme();
-  const navigation = useNavigation<AppScreenNavigation<"Home">>();
+
   const { userInfo } = useStore();
   const logout = useCallback(async () => {
     try {
@@ -42,13 +40,7 @@ const ProfileScreen = () => {
       <ThemedText variant="h2" color={theme.colors.colors.textPrimary}>
         {userInfo?.firstName}
       </ThemedText>
-      <TouchableOpacity
-        style={styles.cartBtn}
-        activeOpacity={0.8}
-        onPress={() => {
-          navigation.navigate("Cart");
-        }}
-      >
+      <TouchableOpacity style={styles.cartBtn} activeOpacity={0.8}>
         <ThemedText variant="body" color={theme.colors.colors.text}>
           Go to Cart
         </ThemedText>
